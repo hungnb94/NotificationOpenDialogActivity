@@ -24,10 +24,10 @@ pipeline {
         }
       }
       steps {
-          sh './gradlew assembleRelease'
+          sh './gradlew assembleDebug'
           sh 'ls -R app/build/outputs/apk'
-          stash name: "apk", includes: 'app/build/outputs/apk/**', allowEmpty: true
-          archiveArtifacts artifacts: 'app/build/outputs/apk/**', fingerprint: true
+          stash name: "apk", includes: 'app/build/outputs/apk/debug/*.apk', allowEmpty: true
+          archiveArtifacts artifacts: 'app/build/outputs/apk/debug/*.apk', fingerprint: true
       }
     }
   }
