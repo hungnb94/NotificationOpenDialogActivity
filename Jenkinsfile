@@ -7,7 +7,7 @@ pipeline {
       steps {
         sh 'docker build -t androidsdk -f cicd/androidsdk/Dockerfile cicd/androidsdk'
         sh 'docker inspect -f . androidsdk'
-        withDockerContainer("androidsdk") {
+        withDockerContainer(image: 'androidsdk') {
             sh './gradlew test'
         }
       }
