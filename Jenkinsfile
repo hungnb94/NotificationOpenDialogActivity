@@ -5,9 +5,11 @@ pipeline {
   stages {
     stage('Local unit test') {
       steps {
-        // sh 'docker build -t androidsdk -f cicd/androidsdk/Dockerfile cicd/androidsdk'
-        // sh 'docker inspect -f . androidsdk'
-        sh './gradlew test'
+        sh 'docker build -t androidsdk -f cicd/androidsdk/Dockerfile cicd/androidsdk'
+        sh 'docker inspect -f . androidsdk'
+        withDockerContainer("androidsdk") {
+            sh './gradlew test'
+        }
       }
     }
     stage('Build') {
